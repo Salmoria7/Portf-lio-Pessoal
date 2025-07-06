@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link  rel="stylesheet" href="EstiloPagPrincipal.css">
+    <title>Portfólio - Portfólio Pessoal</title>
+</head>
+<body>
+    <header>
+        <h1>Portfólio</h1>
+    </header>
+
+
+    <main>
+        <section>
+            <h2 style="text-align: center;">Projeto de HTML e CSS</h2> <!-- Seção de Projeto de HTML e CSS -->
+            <p>Descrição do meu projeto:</p>
+            <p>Este projeto é um exemplo de como criar uma página de receita de bolo simples usando HTML e CSS. 
+                Ele inclui uma estrutura básica com um cabeçalho, um corpo principal e um rodapé. 
+                O objetivo é demonstrar o uso de tags HTML para organizar o conteúdo e aplicar estilos básicos com CSS.</p>
+            <p>O projeto foi desenvolvido para praticar habilidades de desenvolvimento web, 
+                incluindo a criação de layouts responsivos e a aplicação de estilos visuais.</p>
+            <p>Link para o projeto: <a href="https://salmoria7.github.io/Site-de-Receita/">https://salmoria7.github.io/Site-de-Receita/</a></p> <!-- Link para o projeto de HTML e CSS -->
+        </section>
+        <section >
+    <h2 style="text-align: center;">Projeto de SQL</h2> <!-- Seção de Projeto de SQL -->
+    <p>Descrição do meu projeto:</p>
+    <p>Este projeto é um exemplo de como criar um banco de dados simples usando SQL. 
+        Ele inclui a criação de tabelas, inserção de dados e consultas básicas. 
+        O objetivo é demonstrar o uso de comandos SQL para gerenciar e manipular dados em um banco de dados relacional.</p>
+    <p> Abaixo estará os códigos SQL utilizados no projeto:</p>
+<p class="codigo">create database LocadoraVeiculos; <!-- Criação do banco de dados -->
+use LocadoraVeiculos;
+
+create table Cliente(<br> 
+idCliente int not null primary key,<br> 
+CPF varchar (20) not null,<br>
+nome varchar (50) not null,<br>
+telefone varchar(20) not null,<br>
+email varchar (50) not null,<br>
+endereco varchar (100)not null <br>
+);<br>
+
+create table Pagamento (<br>
+idPagamento int not null primary key,<br>
+forma enum ('Cartão','Pix','Dinheiro') not null,<br>
+dataPagamento date not null,<br>
+valorTotal decimal (7,2) not null,<br>
+estado enum ('Pago','Pendente') not null <br>
+);<br>
+
+create table Veiculo (<br>
+idVeiculo int not null primary key,<br>]
+modelo varchar(50) not null,<br>
+marca varchar(50)not null,<br>
+ano int not null,<br>
+placa varchar (10) not null,<br>
+valorDiaria decimal (7,2) not null,<br>
+estado enum ('Disponível','Alugado','Manutencao' ) not null <br>
+); <br>
+
+create table Locacao( <br>
+idLocacao int not null primary key,<br>
+idCliente int not null,<br>
+idPagamento int not null,<br>
+dataInicio date not null,<br>
+dataFim date not null,<br>
+foreign key (idCliente) references Cliente (idCliente),<br>
+foreign key (idPagamento) references Pagamento (idPagamento) <br>
+);<br>
+
+create table LocacaoVeiculo( <br>
+idLocacao int not null ,<br>
+idVeiculo int not null,<br>
+foreign key (idLocacao) references Locacao (idLocacao),<br>
+foreign key (idVeiculo) references Veiculo (idVeiculo)br
+);<br>
+
+create table Manutencao(<br>
+idManutencao int not null primary key,<br>
+idVeiculo int not null,<br>
+descricao varchar (100) not null,<br>
+dataManutencao date not null,<br>
+custo decimal (7,2) not null,<br>
+foreign key (idVeiculo) references Veiculo (idVeiculo)br
+); </p>
+
+<h1>Imagens das pesquisas realizadas</h1>
+<h2> Total Arrecadado</h2>
+<p class="codigo"> SELECT SUM(valorTotal) AS total_arrecadado <br> <!-- Consulta para total arrecadado -->
+   FROM pagamento<br>
+   WHERE estado <> 'pendente';</p>
+   <img src="./pesquisa1.png" alt="pesquisa1"> <!-- Imagem da pesquisa total arrecadado -->
+
+   <h2> Total de Locacoes por Veiculo</h2>
+   <p class="codigo">   SELECT  <!-- Consulta para total de locações por veículo -->
+    c.nome, 
+    SUM(p.valorTotal) AS valor_devido <br> 
+FROM <br>
+    Cliente c <br>
+JOIN <br>
+    Locacao l ON c.idCliente = l.idCliente <br>
+JOIN <br>
+    Pagamento p ON l.idPagamento = p.idPagamento <br>
+WHERE <br>
+    p.estado = 'Pendente' <br>
+GROUP BY <br>
+    c.nome ,<br>
+    
+ORDER BY <br>
+    c.nome ASC; <br>
+    
+    select * from pagamento; </p>
+    <img src="./pesquisa2.png" alt="pesquisa2" " height="300"> <!-- Imagem da pesquisa total de locações por veículo -->
+
+</section>
+
+        <section>
+            <table >
+                <tr>
+                    <td> <a class="nav" href="index.html">Pagina Principal</a> <!-- Link para a página "Página Principal" -->
+                    </td>
+                    <td> <a class="nav" href="SobreMim.html">Sobre Mim</a> <!-- Link para a página "Sobre Mim" -->
+                    </td>
+                    <td > <a class="nav" href="Contato.html">Contato</a> <!-- Link para a página "Contato" -->
+                    </td>
+                    <td> <a class="nav" href="Formacao.html">Formação</a> <!-- Link para a página "Formação" -->
+                    </td>
+                </tr>
+            </table>
+        </section>
+    </main>
+
+
+   
+</body>
+</html>
